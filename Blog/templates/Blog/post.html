@@ -1,0 +1,18 @@
+{% extends 'Blog/base.html' %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2 col-sm-12 maincontent">
+    {% if request.user.is_authenticated %}
+        <h5>Welcome, {{ request.user.first_name }}</h5>
+    {% endif %}
+    <div style="text-align:center"><h3>Welcome to Blog !</h3></div>
+    {% for post in post_obj %}
+    <span>{{ post.title }}</span>
+    <span>{{ post.author }}</span>
+    <span>{{ post.description }}</span>
+    {% endfor %}
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'AddBlogForm' %}">Add Your Blog</a>
+    {% endif %}
+</div>
+{% endblock %}
