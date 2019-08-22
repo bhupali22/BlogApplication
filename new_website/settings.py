@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Blog.context_processors.blogs_count'
             ],
         },
     },
@@ -121,3 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = "/Blog/post"
+LOGOUT_REDIRECT_URL = '/Blog'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

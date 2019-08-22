@@ -1,0 +1,24 @@
+{% extends 'Blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if form %}
+<form action="{% url 'search_blog' %}" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% else %}
+    {% for post in post_obj %}
+    <div>
+        <h3><a>{{ post.title }}</a></h3>
+        <p>{{ post.description }}</p>
+        <p><strong>Author : </strong>{{ post.author }}</p>
+    </div>
+    {% empty %}
+        <h4>Sorry, there is no blog named {{ title }} </h4>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
