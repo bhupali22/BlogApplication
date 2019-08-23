@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
@@ -28,23 +29,31 @@ def add_blog(request):
     }
     if request.user.is_authenticated:
         if request.method == "POST":
-            form = AddBlog(request.POST)
+            form = AddBlog(request.POST,files=request.FILES)
+            #import ipdb;ipdb.set_trace()
+            print(form)
             if form.is_valid():
-                try:
+                print("hello")
+                if Author.objects.get(user = request.user):
                     user1 = Author.objects.get(user = request.user)
-                except:
-                    user1 = Author.objects.create(user=request.user)
+                    print(user1.first_name)
+                else:
+                    user1 = Author(user=request.user)
+                    user1.save()
+                    print(user1.first_name)
 
-                new_post = Post.objects.create(
-                    author = user1,
-                    title = form.cleaned_data.get('title'),
-                    description = form.cleaned_data.get('description'),
-                    publish_date = timezone.now()
-                )
-                new_post.save()
-                return redirect('displayBlog')
+                form.save()
+                # new_post = Post.objects.create(
+                #     author = user1,
+                #     title = form.cleaned_data.get('title'),
+                #     description = form.cleaned_data.get('description'),
+                #     publish_date = timezone.now()
+                # )
+                # new_post.save()
+                return redirect('AddBlogForm')
         else:
-            form1 = AddBlog()
+            form1 = AddBlog(initial={'author': User.objects.get(id=request.user.id) })
+            #form = SellingForm(initial={'seller': Dealer.objects.get(id=request.user.id)})
             context['form'] = form1
 
     return render(request,'Blog/ShowForm.html',context)
@@ -64,6 +73,7 @@ def signUp(request):
         form = SignupForm()
 
     return render(request, 'registration/signup.html', {'form' : form})
+
 
 def search_blog(request):
     context = {
