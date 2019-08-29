@@ -24,5 +24,7 @@ urlpatterns = [
     path('Blog/', include('Blog.urls')),
     path('accounts/',include('django.contrib.auth.urls')),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    url(r'^register/$',blog_views.signUp, name='signUp'),
+    url(r'^register/$',blog_views.signUp.as_view(), name='signUp'),
+    path('edit/<int:pk>/',blog_views.UpdatesignUp.as_view() ,name='edit_profile')
+
 ]

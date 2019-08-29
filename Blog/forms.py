@@ -5,17 +5,17 @@ from django.forms import HiddenInput
 
 from .models import Post
 
-# class AddBlog(forms.Form):
-#     title = forms.CharField(max_length=200)
-#     description = forms.CharField(widget=forms.Textarea)
+class AddBlog(forms.Form):
+    title = forms.CharField(max_length=200)
+    description = forms.CharField(widget=forms.Textarea)
 
 
-class AddBlog(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ('title','description','author','publish_date')
-
-        widgets = {'author': HiddenInput()}
+# class AddBlog(forms.ModelForm):
+#     class Meta:
+#         model = Post
+#         fields = ('title','description','author','publish_date')
+#
+#         widgets = {'author': HiddenInput()}
 
 
 class SignupForm(UserCreationForm):

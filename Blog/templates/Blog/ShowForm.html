@@ -3,7 +3,7 @@
 
 {% block content %}
 {% if form %}
-<form method="POST" enctype="multipart/form-data">
+<form method="post">
     {{ form.errors }}
     {% csrf_token %}
     {{ form|crispy }}

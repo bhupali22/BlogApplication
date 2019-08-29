@@ -26,6 +26,7 @@
         <li><a href="#">Blogs {{ blog_count }}</a></li>
         <li><a href="{% url 'AddBlogForm' %}">Add your Blog</a></li>
         <li><a href="{% url 'search_blog' %}">Search Blog</a></li>
+        <li><a href ="{% url 'edit_profile' request.user.id %}">Edit Profile</a></li>
       {% endif %}
     </ul>
     {% if request.user.is_authenticated %}

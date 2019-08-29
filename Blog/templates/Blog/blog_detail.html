@@ -1,0 +1,9 @@
+{% extends 'Blog/base.html' %}
+
+{% block content %}
+    <div>
+        <h3><a>{{ object.title }}</a></h3>
+        <p>{{ object.description }}</p>
+        <p><strong>Author : </strong>{{ object.author }}</p>
+    </div>
+{% endblock %}
